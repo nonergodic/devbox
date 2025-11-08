@@ -1,0 +1,29 @@
+{
+	"name": "Debian",
+	"image": "mcr.microsoft.com/devcontainers/base:debian",
+	"features": {
+		"ghcr.io/devcontainers/features/node:1": {
+			"nodeGypDependencies": true,
+			"version": "latest",
+			"pnpmVersion": "latest",
+			"nvmVersion": "latest"
+		},
+		"ghcr.io/devcontainers/features/rust:1": {
+			"version": "latest",
+			"profile": "default",
+			"targets": "aarch64-unknown-linux-gnu"
+		},
+		"ghcr.io/devcontainers-extra/features/typescript:2": {
+			"version": "latest"
+		},
+		"ghcr.io/devcontainers/features/python:1": {
+			"version": "latest"
+		},
+		"./features/python-packages": {},
+		"./features/foundry": {},
+		"./features/solana-anchor": {},
+		"./features/custom": {}
+	},
+	"remoteUser": "vscode",
+	"mounts": ["source=${localEnv:HOME}/dev/pnpm-store,target=/home/vscode/.local/share/pnpm/store,type=bind,consistency=cached"]
+}

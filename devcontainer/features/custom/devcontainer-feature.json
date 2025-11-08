@@ -1,0 +1,10 @@
+{
+  "id": "custom",
+  "version": "1.0.0",
+  "name": "Custom Development Tools",
+  "description": "Custom additions like vim, and bash helpers",
+  "installsAfter": ["ghcr.io/devcontainers/features/node"],
+  "containerEnv": {
+    "PATH": "${PATH}:/usr/local/share/nvm/current/bin"
+  }
+}
