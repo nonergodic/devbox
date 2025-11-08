@@ -4,6 +4,8 @@ devcontainer setup to build EVM and Solana smart contract + TS/Python stuff on L
 
 the point of this container is not to provide reproducible builds or security guarantees by nailing down versions but to serve as a recipe to easily build an up to date devbox (hence the name) for developing stuff
 
+the intended use is to build the container once and then reference the image, to avoid constant rebuilding and disk clutter (see `mkcont` bashrc alias)
+
 
 # install
 
