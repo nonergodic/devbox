@@ -24,12 +24,18 @@ install [devcontainer cli](https://github.com/devcontainers/cli):
 
 the default Linux path of pnpm store of the container (`.local/share/pnpm/store`) is mapped to `~/dev/pnpm-store` on the host to allow sharing of `node_modules` to save disk space - adjust or delete `mount` property in `devcontainer.json` as necessary
 
+**WARNING: the build will fail if the host mount does not exist!**
+
 
 ## build
 
 create a symlink (because the devcontainer cli is not very bright and always looks for a .devcontainer folder when building local features):
 
 `ln -s devcontainer .devcontainer`
+
+create the shared pnpm store mount dir (if used - see above):
+
+`mkdir -p ~/dev/pnpm-store`
 
 then build:
 
