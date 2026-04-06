@@ -1,0 +1,12 @@
+{
+  "id": "claude-code",
+  "version": "1.0.0",
+  "name": "Claude Code",
+  "description": "Installs Claude Code CLI and VS Code extension",
+  "installsAfter": ["ghcr.io/devcontainers/features/node"],
+  "customizations": {
+    "vscode": {
+      "extensions": ["anthropic.claude-code"]
+    }
+  }
+}

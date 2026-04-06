@@ -22,6 +22,7 @@
     "./features/python-packages": {},
     "./features/foundry": {},
     "./features/solana-anchor": {},
+    "./features/claude-code": {},
     "./features/custom": {}
   },
   "remoteUser": "vscode",

@@ -48,7 +48,7 @@ then build:
 
 add convenience alias for creating reference containers to `.bashrc`:
 
-`alias mkcont='mkdir -p .devcontainer && echo "{ \"image\": \"devbox\", \"remoteUser\": \"vscode\" }" > .devcontainer/devcontainer.json'`
+`alias mkcont='mkdir -p .devcontainer && echo "{ \"image\": \"devbox\", \"remoteUser\": \"vscode\", \"initializeCommand\": \"sleep 3\" }" > .devcontainer/devcontainer.json'`
 
 ### lazydocker
 
