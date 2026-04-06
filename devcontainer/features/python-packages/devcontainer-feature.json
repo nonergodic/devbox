@@ -1,8 +1,8 @@
 {
   "id": "python-packages",
   "version": "1.0.0",
-  "name": "Python Scientific Packages",
-  "description": "Installs numpy, ipywidgets, scipy, and matplotlib",
+  "name": "Python Custom Packages",
+  "description": "Installs custom python packages",
   "installsAfter": ["ghcr.io/devcontainers/features/python"]
 }
 
