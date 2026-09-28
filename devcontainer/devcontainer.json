@@ -23,6 +23,7 @@
     "./features/foundry": {},
     "./features/solana-anchor": {},
     "./features/claude-code": {},
+    "./features/codex": {},
     "./features/custom": {}
   },
   "remoteUser": "vscode",

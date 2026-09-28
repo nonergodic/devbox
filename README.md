@@ -41,23 +41,47 @@ then build:
 
 `devcontainer build --workspace-folder . --image-name devbox`
 
+to update an existing devbox, add `--no-cache`: `latest` is resolved only when a feature's layer is built, so a cached layer keeps whatever version was current back then
 
-## QoL
 
-### bashrc alias
+# hardware wallets
+
+sign and send txs with a Ledger or Trezor from inside the container (e.g. `cast send --ledger ...`).
+
+prerequisite: the wallet already works on the *host* - on Linux that means the vendor udev rules are installed ([Ledger](https://github.com/LedgerHQ/udev-rules), [Trezor](https://trezor.io/guides/trezorctl/udev-rules)).
+
+## container access
+
+`mkcont` injects two `runArgs`:
+
+* `--volume=/dev/bus/usb:/dev/bus/usb` mounts the usb *directory* rather than a fixed `--device` node, so a wallet that is replugged or re-enumerated (a Ledger re-enumerates when unlocked) shows up live without restarting the container
+* `--device-cgroup-rule=c 189:* rmw` lifts Docker's default-deny on device access for all usb (major 189)
+
+## verify
+
+plug in and unlock the device, then from inside the container: `cast wallet address --ledger` (or `--trezor`).
+
+
+# usage
+
+## bashrc alias
 
 add convenience alias for creating reference containers to `.bashrc`:
 
-`alias mkcont='mkdir -p .devcontainer && echo "{ \"image\": \"devbox\", \"remoteUser\": \"vscode\", \"initializeCommand\": \"sleep 3\" }" > .devcontainer/devcontainer.json'`
+`alias mkcont='mkdir -p .devcontainer && echo "{ \"image\": \"devbox\", \"remoteUser\": \"vscode\", \"initializeCommand\": \"sleep 3\", \"runArgs\": [\"--device-cgroup-rule=c 189:* rmw\", \"--volume=/dev/bus/usb:/dev/bus/usb\"] }" > .devcontainer/devcontainer.json'`
 
-### lazydocker
+`initializeCommand` runs on the *host*, before the container is created, and the tooling blocks on it. the `sleep 3` works around an intermittent "terminal stuck at startup" race (most likely the recreate racing the previous container's teardown) - it is not always needed, so drop it if you never hit the hang.
+
+the `runArgs` grant hardware-wallet access (Ledger/Trezor) - see [hardware wallets](#hardware-wallets). they are harmless no-ops on a non-Linux host or with no wallet attached.
+
+## lazydocker
 
 comfortably manage/delete containers via [lazydocker cli](https://github.com/jesseduffield/lazydocker):
 
 `brew install jesseduffield/lazydocker/lazydocker`
 
 
-## devcontainer references
+# devcontainer references
 
 * [spec](https://containers.dev/)
 * [github](https://github.com/devcontainers)
